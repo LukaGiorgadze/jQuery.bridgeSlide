@@ -1,9 +1,9 @@
 /**
- * jQuery bridgeSlide Plugin 0.2 (10.16.2014)
+ * jQuery bridgeSlide Plugin 0.2.1 (10.22.2014)
  * @link http://gilu.org
  *
  * @copyright 2014, Gilu.org
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -123,10 +123,28 @@
 				'minHeight': this.items.filter(':visible').first().innerHeight()
 			});
 
+			// Set some auto configs
+			// Element margins
+			if(config.itemMargin === 'auto')
+			{
+				config.itemMargin = parseInt(this.items.first().css('marginLeft')) + parseInt(this.items.first().css('marginRight'));
+			}
+			config.itemMargin = parseInt(config.itemMargin);
+
 			// If items is less than visible items
 			if(this.itemsLength <= this.config. visibleItems)
 			{
 				$(this.config.paginationPrev + ',' + this.config.paginationNext, this.pagination).addClass('disabled');
+				// Margin left for element
+				var marginLeft = 0;
+				this.items.each(function(i)
+				{
+					$(this).css({
+						marginLeft: marginLeft + 'px'
+					});
+					// Add margins
+					marginLeft += config.itemMargin;
+				});
 				return false;
 			}
 
@@ -142,21 +160,12 @@
 			// Window resize fixer
 			this.fixer();
 
-			// Set some auto configs
-			// Element margins
-			if(config.itemMargin === 'auto')
-			{
-				config.itemMargin = parseInt(this.items.first().css('marginLeft')) + parseInt(this.items.first().css('marginRight'));
-			}
-			config.itemMargin = parseInt(config.itemMargin);
-
 			// Hide pagination
 			this.pagination.hide();
 			// Hide all items
 			this.items.hide();
 			// Start Slider
 			this.startSlider();
-			return false;
 		},
 
 
@@ -245,7 +254,6 @@
 				});
 			}
 
-
 			// Change slides by keyboard arrow clicking
 			if(config.keyboardArrows === true)
 			{
@@ -292,7 +300,6 @@
 					}
 				});
 			}
-			return false;
 		},
 
 
@@ -454,7 +461,6 @@
 					{
 					}
 				});
-			return false;
 		},
 
 
@@ -465,7 +471,6 @@
 		setPaginationClickable: function(value)
 		{
 			this.paginationClickable = value;
-			return false;
 		},
 
 
@@ -508,7 +513,6 @@
 					'width': element.config.width
 				});
 			});
-			return false;
 		},
 
 
@@ -578,7 +582,6 @@
 				handleswipe(swipePos, e);
 				//e.preventDefault();
 			}, false);
-			return false;
 		}
 	};
 }(jQuery));
