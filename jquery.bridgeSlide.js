@@ -1,5 +1,5 @@
 /**
- * jQuery bridgeSlide Plugin 0.2.1 (10.22.2014)
+ * jQuery bridgeSlide Plugin 0.2.2 (06.16.2015)
  * @link http://gilu.org
  *
  * @copyright 2014, Gilu.org
@@ -143,7 +143,8 @@
 						marginLeft: marginLeft + 'px'
 					});
 					// Add margins
-					marginLeft += config.itemMargin;
+					//marginLeft += config.itemMargin;
+					marginLeft = config.itemMargin;
 				});
 				return false;
 			}
